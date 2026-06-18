@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Material Hub – VibhillionAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0d1a;
+  --nav: #12122a;
+  --teal: #00c9b1;
+  --accent: #e94560;
+  --gold: #f5a623;
+  --blue: #7eb3ff;
+  --purple: #b084ff;
+  --green: #4caf50;
+  --text: #e0e0f0;
+  --muted: #8080a0;
+  --card: #161630;
+  --cardH: #1e2250;
+  --border: #252550;
+  --white: #ffffff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'Nunito', sans-serif; min-height: 100vh; }
+
+/* NAVBAR */
+.navbar {
+  background: rgba(13,13,26,0.97);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.nav-brand { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.nav-brand .logo-dot { width: 32px; height: 32px; background: linear-gradient(135deg, var(--teal), #00a090); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+.nav-brand span { font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--teal); }
+.breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--muted); }
+.breadcrumb .crumb { cursor: pointer; transition: color 0.2s; }
+.breadcrumb .crumb:hover { color: var(--teal); }
+.breadcrumb .sep { color: var(--border); }
+.breadcrumb .crumb.active { color: var(--text); font-weight: 700; }
+
+/* MAIN */
+.main { max-width: 900px; margin: 0 auto; padding: 30px 20px 60px; }
+
+/* HERO SECTION */
+.hub-hero {
+  background: linear-gradient(135deg, rgba(15,52,96,0.5), rgba(13,13,26,0.8));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  margin-bottom: 32px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.hub-hero::before {
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(0,201,177,0.08), transparent 70%);
+}
+.hub-hero .page-title {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 800; color: var(--white);
+  margin-bottom: 6px;
+}
+.hub-hero .page-subtitle { font-size: 0.9rem; color: var(--muted); }
+.hub-hero .page-subtitle span { color: var(--teal); font-weight: 700; }
+
+/* SECTION TITLE */
+.section-title {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--gold); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* GRID */
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin-bottom: 32px; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-bottom: 32px; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-bottom: 32px; }
+
+/* CARD */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 16px;
+  cursor: pointer;
+  transition: all 0.22s;
+  position: relative; overflow: hidden;
+}
+.card:hover { transform: translateY(-3px); border-color: var(--teal); background: var(--cardH); box-shadow: 0 8px 24px rgba(0,201,177,0.12); }
+.card .card-icon { font-size: 2rem; margin-bottom: 10px; }
+.card .card-title { font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 1rem; color: var(--white); margin-bottom: 4px; }
+.card .card-sub { font-size: 0.78rem; color: var(--muted); }
+.card .card-badge { position: absolute; top: 10px; right: 10px; font-size: 0.62rem; padding: 2px 8px; border-radius: 10px; font-weight: 700; }
+.card .card-count { font-size: 0.75rem; color: var(--teal); margin-top: 8px; font-weight: 700; }
+
+/* COLOR VARIANTS */
+.card.teal:hover { border-color: var(--teal); }
+.card.teal .card-icon-bg { color: var(--teal); }
+.card.accent:hover { border-color: var(--accent); }
+.card.gold:hover { border-color: var(--gold); }
+.card.blue:hover { border-color: var(--blue); }
+.card.purple:hover { border-color: var(--purple); }
+.card.green:hover { border-color: var(--green); }
+
+/* CHAPTER CARD */
+.chapter-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex; align-items: center; gap: 14px;
+}
+.chapter-card:hover { border-color: var(--teal); background: var(--cardH); transform: translateX(4px); }
+.chapter-card .ch-num {
+  min-width: 38px; height: 38px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 0.9rem;
+}
+.chapter-card .ch-info { flex: 1; }
+.chapter-card .ch-title { font-weight: 700; font-size: 0.95rem; color: var(--white); }
+.chapter-card .ch-sub { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+.chapter-card .ch-arrow { color: var(--muted); font-size: 1rem; }
+.chapter-card:hover .ch-arrow { color: var(--teal); }
+.chapter-card .ch-tag {
+  font-size: 0.62rem; padding: 2px 7px; border-radius: 8px;
+  font-weight: 700; background: rgba(0,201,177,0.1); color: var(--teal);
+}
+.chapter-card .coming-soon {
+  font-size: 0.65rem; padding: 2px 7px; border-radius: 8px;
+  font-weight: 700; background: rgba(128,128,160,0.15); color: var(--muted);
+}
+
+/* BACK BUTTON */
+.back-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 8px 16px;
+  color: var(--muted); cursor: pointer;
+  font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700;
+  transition: all 0.2s; margin-bottom: 22px;
+}
+.back-btn:hover { border-color: var(--teal); color: var(--teal); }
+
+/* EMPTY STATE */
+.coming-soon-box {
+  text-align: center; padding: 40px 20px;
+  background: var(--card); border: 1px dashed var(--border);
+  border-radius: 14px; margin: 10px 0;
+}
+.coming-soon-box .cs-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.coming-soon-box h3 { font-family: 'Baloo 2', sans-serif; font-size: 1.1rem; color: var(--white); margin-bottom: 6px; }
+.coming-soon-box p { font-size: 0.85rem; color: var(--muted); }
+
+/* FOOTER */
+.footer { text-align: center; padding: 20px; font-size: 0.75rem; color: var(--muted); border-top: 1px solid var(--border); margin-top: 40px; }
+.footer span { color: var(--teal); font-weight: 700; }
+
+@media (max-width: 500px) {
+  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-brand" onclick="goHome()">
+    <div class="logo-dot">📚</div>
+    <span>VibhillionAI</span>
+  </div>
+  <div class="breadcrumb" id="breadcrumb">
+    <span class="crumb active">Material Hub</span>
+  </div>
+</nav>
+
+<div class="main" id="main-content"></div>
+
+<div class="footer">
+  Powered by <span>VibhillionAI</span> · Study Smart, Score More
+</div>
+
+<script>
+// ─── DATA ────────────────────────────────────
+const DATA = {
+  classes: [
+    { id: 'class-6',  label: 'Class 6',  icon: '6️⃣', sub: 'Foundation level', color: 'teal',   subjects: ['social'] },
+    { id: 'class-7',  label: 'Class 7',  icon: '7️⃣', sub: 'Foundation level', color: 'teal',   subjects: ['social'] },
+    { id: 'class-8',  label: 'Class 8',  icon: '8️⃣', sub: 'Foundation level', color: 'blue',   subjects: ['social','science'] },
+    { id: 'class-9',  label: 'Class 9',  icon: '9️⃣', sub: 'Secondary level',  color: 'blue',   subjects: ['social','science','maths'] },
+    { id: 'class-10', label: 'Class 10', icon: '🔟', sub: 'Secondary level',  color: 'gold',   subjects: ['social','science','maths'] },
+    { id: 'class-11', label: 'Class 11', icon: '🎯', sub: 'Senior secondary',  color: 'accent', subjects: ['chemistry','physics','biology','social'] },
+    { id: 'class-12', label: 'Class 12', icon: '🏆', sub: 'Senior secondary',  color: 'purple', subjects: ['chemistry','physics','biology','social'] },
+  ],
+
+  subjects: {
+    chemistry: { label: 'Chemistry',  icon: '⚗️',  color: 'teal',   desc: 'NCERT Class 11 & 12' },
+    physics:   { label: 'Physics',    icon: '⚡',  color: 'blue',   desc: 'NCERT Class 11 & 12' },
+    biology:   { label: 'Biology',    icon: '🌿',  color: 'green',  desc: 'NCERT Class 11 & 12' },
+    social:    { label: 'Social',     icon: '🌍',  color: 'gold',   desc: 'History, Polity, Geography, Economics' },
+    science:   { label: 'Science',    icon: '🔬',  color: 'purple', desc: 'Class 8, 9, 10' },
+    maths:     { label: 'Mathematics',icon: '📐',  color: 'accent', desc: 'Class 9, 10 & SSC CGL' },
+  },
+
+  chapters: {
+    'class-11-chemistry': [
+      { id: 'ch1-mole-concept',      title: 'Basic Concepts of Chemistry',     sub: 'Mole Concept, Avogadro Number',         file: 'materials/class-11/chemistry/mole-concept-v2.html', ready: true  },
+      { id: 'ch2-structure-of-atom', title: 'Structure of Atom',               sub: 'Bohr Model, Quantum Numbers',           file: null, ready: false },
+      { id: 'ch3-periodic-table',    title: 'Classification of Elements',      sub: 'Periodic Table, Periodicity',           file: null, ready: false },
+      { id: 'ch4-chemical-bonding',  title: 'Chemical Bonding',                sub: 'Ionic, Covalent, Metallic bonds',       file: null, ready: false },
+      { id: 'ch5-thermodynamics',    title: 'Thermodynamics',                   sub: 'Enthalpy, Entropy, Gibbs energy',       file: null, ready: false },
+      { id: 'ch6-equilibrium',       title: 'Equilibrium',                     sub: 'Chemical & Ionic Equilibrium',          file: null, ready: false },
+      { id: 'ch7-redox',             title: 'Redox Reactions',                 sub: 'Oxidation, Reduction, Electrochemistry',file: null, ready: false },
+    ],
+    'class-11-physics': [
+      { id: 'ch1-units',             title: 'Physical World & Measurement',    sub: 'Units, Dimensions',                     file: null, ready: false },
+      { id: 'ch2-motion',            title: 'Motion in a Straight Line',       sub: 'Kinematics, Velocity, Acceleration',    file: null, ready: false },
+      { id: 'ch3-motion2d',          title: 'Motion in a Plane',               sub: 'Projectile, Circular Motion',           file: null, ready: false },
+      { id: 'ch4-laws-motion',       title: 'Laws of Motion',                  sub: "Newton's Laws, Friction",               file: null, ready: false },
+      { id: 'ch5-work-energy',       title: 'Work, Energy and Power',          sub: 'Work-Energy Theorem, Conservation',     file: null, ready: false },
+      { id: 'ch6-rotation',          title: 'System of Particles & Rotation',  sub: 'Torque, Angular Momentum',              file: null, ready: false },
+      { id: 'ch7-gravitation',       title: 'Gravitation',                     sub: "Kepler's Laws, Satellites",             file: null, ready: false },
+    ],
+    'class-11-biology': [
+      { id: 'ch1-living-world',      title: 'The Living World',                sub: 'Biodiversity, Classification',          file: null, ready: false },
+      { id: 'ch2-classification',    title: 'Biological Classification',       sub: '5 Kingdoms, Virus, Bacteria',           file: null, ready: false },
+      { id: 'ch3-plant-kingdom',     title: 'Plant Kingdom',                   sub: 'Algae, Bryophytes, Pteridophytes',      file: null, ready: false },
+      { id: 'ch4-animal-kingdom',    title: 'Animal Kingdom',                  sub: 'Phyla, Classification systems',         file: null, ready: false },
+      { id: 'ch5-cell',              title: 'Cell: Unit of Life',              sub: 'Cell Structure, Organelles',            file: null, ready: false },
+      { id: 'ch6-biomolecules',      title: 'Biomolecules',                    sub: 'Proteins, Carbs, Nucleic Acids',        file: null, ready: false },
+    ],
+    'class-11-social': [
+      { id: 'ch1-india-world',       title: 'India — Size and Location',       sub: 'Geography, Coordinates',                file: null, ready: false },
+      { id: 'ch2-structure',         title: 'Structure of Indian Economy',     sub: 'Economic Development, Sectors',         file: null, ready: false },
+      { id: 'ch3-constitution',      title: 'Indian Constitution',             sub: 'Preamble, Fundamental Rights',          file: null, ready: false },
+      { id: 'ch4-ancient-history',   title: 'Ancient Indian History',          sub: 'Indus Valley, Vedic Period',            file: null, ready: false },
+    ],
+    'class-11-physics': [
+      { id: 'ch1-units',             title: 'Physical World & Measurement',    sub: 'Units, Dimensions',                     file: null, ready: false },
+      { id: 'ch5-work-energy',       title: 'Work, Energy and Power',          sub: 'Work-Energy Theorem',                   file: null, ready: false },
+      { id: 'ch7-gravitation',       title: 'Gravitation',                     sub: "Kepler's Laws",                         file: null, ready: false },
+    ],
+  }
+};
+
+// ─── STATE ───────────────────────────────────
+let state = { view: 'classes', class: null, subject: null };
+
+// ─── ROUTER ──────────────────────────────────
+function goHome() {
+  state = { view: 'classes', class: null, subject: null };
+  render();
+}
+function selectClass(classId) {
+  state = { view: 'subjects', class: classId, subject: null };
+  render();
+}
+function selectSubject(subjectId) {
+  state.view = 'chapters';
+  state.subject = subjectId;
+  render();
+}
+function goBack() {
+  if (state.view === 'chapters') { state.view = 'subjects'; state.subject = null; }
+  else if (state.view === 'subjects') { state.view = 'classes'; state.class = null; }
+  render();
+}
+function openChapter(file) {
+  if (!file) return;
+  window.location.href = file;
+}
+
+// ─── RENDER ──────────────────────────────────
+function render() {
+  updateBreadcrumb();
+  const main = document.getElementById('main-content');
+
+  if (state.view === 'classes') renderClasses(main);
+  else if (state.view === 'subjects') renderSubjects(main);
+  else if (state.view === 'chapters') renderChapters(main);
+}
+
+function updateBreadcrumb() {
+  const bc = document.getElementById('breadcrumb');
+  let html = `<span class="crumb" onclick="goHome()">Material Hub</span>`;
+  if (state.class) {
+    const cl = DATA.classes.find(c => c.id === state.class);
+    html += `<span class="sep">›</span>`;
+    if (state.view === 'subjects') html += `<span class="crumb active">${cl.label}</span>`;
+    else html += `<span class="crumb" onclick="selectClass('${state.class}')">${cl.label}</span>`;
+  }
+  if (state.subject) {
+    const sub = DATA.subjects[state.subject];
+    html += `<span class="sep">›</span><span class="crumb active">${sub.label}</span>`;
+  }
+  bc.innerHTML = html;
+}
+
+// VIEW 1 — CLASSES
+function renderClasses(el) {
+  let html = `
+    <div class="hub-hero">
+      <div class="page-title">📚 Material Hub</div>
+      <div class="page-subtitle">Complete study notes for <span>Class 6–12</span> · SCERT & NCERT Aligned · Telugu + English</div>
+    </div>
+    <div class="section-title">🎓 Select Your Class</div>
+    <div class="grid-3">`;
+
+  DATA.classes.forEach(cl => {
+    const subCount = cl.subjects.length;
+    html += `
+      <div class="card ${cl.color}" onclick="selectClass('${cl.id}')">
+        <div class="card-icon">${cl.icon}</div>
+        <div class="card-title">${cl.label}</div>
+        <div class="card-sub">${cl.sub}</div>
+        <div class="card-count">▸ ${subCount} subject${subCount > 1 ? 's' : ''}</div>
+      </div>`;
+  });
+
+  html += `</div>
+    <div class="section-title">🏆 Exam Specific</div>
+    <div class="grid-3">
+      <div class="card teal" onclick="alert('Coming Soon!')">
+        <div class="card-icon">🏛️</div>
+        <div class="card-title">UPSC / APPSC</div>
+        <div class="card-sub">Group 1 & 2 materials</div>
+        <div class="card-count">▸ Polity, History, Geo...</div>
+      </div>
+      <div class="card gold" onclick="alert('Coming Soon!')">
+        <div class="card-icon">📋</div>
+        <div class="card-title">SSC CGL / CHSL</div>
+        <div class="card-sub">Maths, GK, Reasoning</div>
+        <div class="card-count">▸ PYQs included</div>
+      </div>
+      <div class="card blue" onclick="alert('Coming Soon!')">
+        <div class="card-icon">🚂</div>
+        <div class="card-title">Railway / RRB</div>
+        <div class="card-sub">Group D, NTPC</div>
+        <div class="card-count">▸ Coming soon</div>
+      </div>
+    </div>`;
+
+  el.innerHTML = html;
+}
+
+// VIEW 2 — SUBJECTS
+function renderSubjects(el) {
+  const cl = DATA.classes.find(c => c.id === state.class);
+  let html = `
+    <button class="back-btn" onclick="goBack()">← Back to Classes</button>
+    <div class="hub-hero">
+      <div class="page-title">${cl.icon} ${cl.label} — Subjects</div>
+      <div class="page-subtitle">Select a subject to view chapters</div>
+    </div>
+    <div class="section-title">📖 Select Subject</div>
+    <div class="grid-2">`;
+
+  cl.subjects.forEach(subId => {
+    const sub = DATA.subjects[subId];
+    const key = `${state.class}-${subId}`;
+    const chapters = DATA.chapters[key] || [];
+    const readyCount = chapters.filter(c => c.ready).length;
+
+    html += `
+      <div class="card ${sub.color}" onclick="selectSubject('${subId}')">
+        <div class="card-icon">${sub.icon}</div>
+        <div class="card-title">${sub.label}</div>
+        <div class="card-sub">${sub.desc}</div>
+        <div class="card-count">
+          ${readyCount > 0 ? `✅ ${readyCount} chapter${readyCount > 1 ? 's' : ''} ready` : `▸ ${chapters.length || '—'} chapters`}
+        </div>
+      </div>`;
+  });
+
+  html += `</div>`;
+  el.innerHTML = html;
+}
+
+// VIEW 3 — CHAPTERS
+function renderChapters(el) {
+  const cl = DATA.classes.find(c => c.id === state.class);
+  const sub = DATA.subjects[state.subject];
+  const key = `${state.class}-${state.subject}`;
+  const chapters = DATA.chapters[key] || [];
+
+  const colors = {
+    chemistry: { bg: 'rgba(0,201,177,0.12)', border: '#00c9b1', text: '#00c9b1' },
+    physics:   { bg: 'rgba(126,179,255,0.12)', border: '#7eb3ff', text: '#7eb3ff' },
+    biology:   { bg: 'rgba(76,175,80,0.12)', border: '#4caf50', text: '#4caf50' },
+    social:    { bg: 'rgba(245,166,35,0.12)', border: '#f5a623', text: '#f5a623' },
+    science:   { bg: 'rgba(176,132,255,0.12)', border: '#b084ff', text: '#b084ff' },
+    maths:     { bg: 'rgba(233,69,96,0.12)', border: '#e94560', text: '#e94560' },
+  };
+  const c = colors[state.subject] || colors.chemistry;
+
+  let html = `
+    <button class="back-btn" onclick="goBack()">← Back to Subjects</button>
+    <div class="hub-hero">
+      <div class="page-title">${sub.icon} ${cl.label} ${sub.label}</div>
+      <div class="page-subtitle">${sub.desc} · Click chapter to start studying</div>
+    </div>
+    <div class="section-title">📑 Chapters</div>`;
+
+  if (chapters.length === 0) {
+    html += `
+      <div class="coming-soon-box">
+        <div class="cs-icon">🚧</div>
+        <h3>Coming Soon!</h3>
+        <p>Ee subject chapters prepare avutunnay. Soon add chesthamu!</p>
+      </div>`;
+  } else {
+    chapters.forEach((ch, i) => {
+      const num = String(i + 1).padStart(2, '0');
+      html += `
+        <div class="chapter-card" onclick="${ch.ready ? `openChapter('${ch.file}')` : ''}">
+          <div class="ch-num" style="background:${c.bg};color:${c.text};border:1px solid ${c.border};">${num}</div>
+          <div class="ch-info">
+            <div class="ch-title">${ch.title}</div>
+            <div class="ch-sub">${ch.sub}</div>
+          </div>
+          ${ch.ready
+            ? `<span class="ch-tag">✅ Ready</span>`
+            : `<span class="coming-soon">🔜 Soon</span>`}
+          <div class="ch-arrow">${ch.ready ? '→' : '·'}</div>
+        </div>`;
+    });
+  }
+
+  el.innerHTML = html;
+}
+
+// ─── INIT ─────────────────────────────────────
+render();
+</script>
+</body>
+</html>
